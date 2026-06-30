@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def analyze_data(df):
     
@@ -103,6 +104,42 @@ def analyze_data(df):
     
     top10.to_csv("output/top10_performers.csv", index=False)
     print("\nTop 10 performers saved to output/top10_performers.csv!")
+
+   
+    print("\n" + "=" * 50)
+    print("  BONUS: GENERATING VISUALIZATIONS")
+    print("=" * 50)
+    
+   #Chart 1
+    grade_counts = df["Grade"].value_counts().sort_index()
+    plt.figure(figsize=(8, 5))
+    plt.bar(grade_counts.index, grade_counts.values, color="steelblue")
+    plt.title("Grade Distribution")
+    plt.xlabel("Grade")
+    plt.ylabel("Number of Students")
+    plt.savefig("output/chart_grade_distribution.png")
+    plt.close()
+    print("Saved chart_grade_distribution.png")
+    
+    # Chart 2 
+    plt.figure(figsize=(8, 5))
+    plt.hist(df["Marks"], bins=20, color="seagreen", edgecolor="black")
+    plt.title("Distribution of Marks")
+    plt.xlabel("Marks")
+    plt.ylabel("Number of Students")
+    plt.savefig("output/chart_marks_distribution.png")
+    plt.close()
+    print("Saved chart_marks_distribution.png")
+    
+    # Chart 3 
+    plt.figure(figsize=(8, 5))
+    plt.scatter(df["Attendance"], df["Marks"], alpha=0.4, color="darkorange")
+    plt.title("Attendance vs Marks")
+    plt.xlabel("Attendance (%)")
+    plt.ylabel("Marks")
+    plt.savefig("output/chart_attendance_vs_marks.png")
+    plt.close()
+    print(" Saved chart_attendance_vs_marks.png")
     return df
 
 
