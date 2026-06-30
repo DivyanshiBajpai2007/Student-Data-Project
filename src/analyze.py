@@ -93,5 +93,18 @@ def analyze_data(df):
     
     print("\nCORRELATION MATRIX:")
     print(df[["Marks","Attendance","StudyHours"]].corr().round(2))
+
+    print("\n" + "=" * 50)
+    print("   TOP 10 STUDENTS BY PERFORMANCE SCORE")
+    print("=" * 50)
     
+    top10 = df.sort_values("PerformanceScore", ascending=False).head(10)
+    print(top10[["Name", "Marks", "Attendance", "StudyHours", "PerformanceScore"]])
+    
+    top10.to_csv("output/top10_performers.csv", index=False)
+    print("\nTop 10 performers saved to output/top10_performers.csv!")
     return df
+
+
+    
+    
